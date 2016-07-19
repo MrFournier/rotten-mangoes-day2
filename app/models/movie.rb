@@ -1,6 +1,7 @@
 class Movie < ActiveRecord::Base
 
   has_many :reviews
+  mount_uploader :image, ImageUploader
 
   validates :title,
     presence: true
@@ -14,11 +15,13 @@ class Movie < ActiveRecord::Base
   validates :description,
     presence: true
 
-  validates :poster_image_url,
-    presence: true
+  # validates :poster_image_url,
+  #   presence: true
 
   validates :release_date,
     presence: true
+
+  validate :picture
 
   validate :release_date_is_in_the_past
 
@@ -32,6 +35,13 @@ class Movie < ActiveRecord::Base
     if release_date.present? && release_date > Date.today
       errors.add(:release_date, "should be in the past")
     end
+  end
+
+  def picture
+    if image.present? ^ poster_image_url.present?
+      true
+    end
+    false
   end
 
 end
