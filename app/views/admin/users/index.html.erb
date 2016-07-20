@@ -1,8 +1,21 @@
 <h1>Rotten Mangoes</h1>
 <h2>Admin page</h2>
 <%= link_to "Create new user", new_admin_user_path, method: :get %>
-<% @users.each do |user|%>
-  <h3><%= user.full_name %> (<%= link_to "Edit User", edit_admin_user_path(user), method: :get %> | <%= link_to "Destroy", admin_user_path(user), method: :delete, data: {confirm: 'Are you sure?'} %>)</h3>
-  <h3><%= user.email %></h3>
 
+<% @users.each do |user|%>
+  <table>
+    <tr>
+      <th>Full Name</th>
+      <th>Email</th>
+    </tr>
+    <tr>
+      <td><%= user.full_name %></td>
+      <td><%= user.email%></td>
+      <td>
+        (<%= link_to "Edit User", edit_admin_user_path(user), method: :get %> | <%= link_to "Destroy", admin_user_path(user), method: :delete, data: {confirm: 'Are you sure?'} %>)
+        </td>
+    </tr>
+  </table>
 <% end %>
+
+<%= paginate @users %>

@@ -32,6 +32,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'rmagick'
 gem 'carrierwave'
 
+# Adding pagination gen kaminari
+gem 'kaminari'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', '~> 0.4.0', require: false
