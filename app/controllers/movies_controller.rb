@@ -10,14 +10,15 @@ class MoviesController < ApplicationController
       @movies = @movies.where('director LIKE ?', "%#{params[:director]}%")
     end
     if params[:runtime_in_minutes]
+      
       case params[:runtime_in_minutes]
 
-      when 1
-        @movies = @movies.where('runtime_in_minutes', )
-      when 2
-
-      when 3
-
+      when '1'
+        @movies = @movies.where('runtime_in_minutes < ?', 90)
+      when '2'
+        @movies = @movies.where(runtime_in_minutes: 90..120)
+      when '3'
+        @movies = @movies.where('runtime_in_minutes > ?', 120)
       end
     end
   end
