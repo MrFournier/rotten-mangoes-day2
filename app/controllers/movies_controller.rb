@@ -2,6 +2,25 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+
+    if params[:title]
+      @movies = @movies.where('title LIKE ?', "%#{params[:title]}%")
+    end
+    if params[:director]
+      @movies = @movies.where('director LIKE ?', "%#{params[:director]}%")
+    end
+    if params[:runtime_in_minutes]
+      
+      case params[:runtime_in_minutes]
+
+      when '1'
+        @movies = @movies.where('runtime_in_minutes < ?', 90)
+      when '2'
+        @movies = @movies.where(runtime_in_minutes: 90..120)
+      when '3'
+        @movies = @movies.where('runtime_in_minutes > ?', 120)
+      end
+    end
   end
 
   def show

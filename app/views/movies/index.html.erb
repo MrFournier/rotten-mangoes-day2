@@ -1,5 +1,13 @@
 <h1>Rotten Mangoes</h1>
-<%= link_to "Submit a movie!", new_movie_path %>
+<div>
+  <h3>Search for a movie</h3>
+  <div class="top-home">
+<%= render 'search_bar' %>
+</div>
+<div class="top-home submit-container">
+  <%= link_to "Submit a movie!", new_movie_path %>
+</div>
+
 <hr>
 <% @movies.each do |movie| %>
   <%= link_to image_tag(movie.image.thumb.url), movie_path(movie) %>
