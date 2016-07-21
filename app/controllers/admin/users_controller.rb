@@ -42,6 +42,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.destroy
+      UserMailer.user_deleted(@user).deliver_now
       redirect_to admin_users_path, notice: "User has been destroyed."
     else 
       redirect_to admin_users_path, notice: "Failed to delete user."
